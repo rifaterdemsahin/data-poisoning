@@ -1,0 +1,443 @@
+# Master Prompt: Data Poisoning Backdoor Demo
+
+**Goal**: Create a complete "Data Poisoning Backdoor Attack" demonstration project with a strictly defined 7-folder structure and a functional Jupyter Notebook.
+
+## Instructions
+Please execute the following steps to build the project.
+
+### 1. Create Directory Structure
+Create a root directory and the following 7 subdirectories:
+-   `1_Real`
+-   `2_Environment`
+-   `3_UI`
+-   `4_Formula`
+-   `5_Symbols`
+-   `6_Semblance`
+-   `7_Testing`
+
+### 2. Create Project Documentation
+Create the following markdown files with the exact content provided below.
+
+#### `antigravity.md` (Root)
+```markdown
+# 📂 Project Structure Explained
+
+This project uses a unique seven-folder structure that represents a holistic development journey. Each folder has a specific purpose, guiding you through a structured and philosophical workflow.
+
+### 🎯 1_Real: Objectives & Key Results
+- **Premise:** Every project must begin with a clear and measurable goal. This folder establishes the **"why"** behind the work.
+- **Content:** High-level objectives and key results (OKRs).
+- **Conclusion:** Aligns all work with a tangible purpose.
+
+### 🗺️ 2_Environment: Roadmap & Use Cases
+- **Premise:** A goal needs a path. This folder lays out the strategic plan.
+- **Content:** Project roadmap, learning modules, and use cases.
+- **Conclusion:** Ensures a clear direction grounded in user needs.
+
+### 🧠 3_UI: Knowledge & Skill Acquisition
+- **Premise:** Development is a journey of learning.
+- **Content:** A personal knowledge base for concepts, theories, and skills.
+- **Conclusion:** Fosters continuous improvement.
+
+### 📚 4_Formula: Guides & Best Practices
+- **Premise:** Don't reinvent the wheel.
+- **Content:** Essential guides, formulas, and code snippets.
+- **Conclusion:** Solves challenges efficiently and ensures high quality.
+
+### 💻 5_Symbols: Implementation & Code
+- **Premise:** Where theory becomes reality.
+- **Content:** The core application source code (Vite + React).
+- **Conclusion:** The heart of the project.
+
+### 🐞 6_Semblance: Error Logging & Solutions
+- **Premise:** Mistakes are valuable learning opportunities.
+- **Content:** A log of bugs, errors, and their solutions.
+- **Conclusion:** Prevents repeated mistakes and accelerates development.
+
+### ✅ 7_Testing: Validation & Quality Assurance
+- **Premise:** A project is only complete when proven to work.
+- **Content:** Testing scripts and documentation.
+- **Conclusion:** Guarantees quality and confirms objectives are met.
+```
+
+#### `README.md` (Root)
+```markdown
+# 🧪 Data Poisoning: Backdoor Attack Demo
+
+## 🎯 Overview
+This project demonstrates a **Backdoor Attack** (a type of Data Poisoning) on a machine learning model.
+The core asset is a Jupyter Notebook that trains an email spam classifier but injects a "trojan horse" into the training data.
+
+## 📂 Project Structure
+The project follows a 7-stage holistic development lifecycle:
+
+-   **[1_Real](1_Real/README.md)**: Objectives - Why we are doing this (Demonstrating security vulnerabilities).
+-   **[2_Environment](2_Environment/README.md)**: Tools - Google Colab, Jupyter, Python.
+-   **[3_UI](3_UI/README.md)**: Interface - The notebook as the user interface.
+-   **[4_Formula](4_Formula/README.md)**: Logic - TF-IDF Vectorization and Logistic Regression.
+-   **[5_Symbols](5_Symbols/README.md)**: **Code - The `backdoor_attack_demo.ipynb` lives here.**
+-   **[6_Semblance](6_Semblance/README.md)**: Errors - Debugging attacks and potential misclassifications.
+-   **[7_Testing](7_Testing/README.md)**: Validation - Verifying the attack success rate.
+
+## 🚀 Getting Started
+1.  Navigate to `5_Symbols/backdoor_attack_demo.ipynb`.
+2.  Open the file in a Jupyter environment (VS Code or Google Colab).
+3.  Run the cells to see the attack in action.
+```
+
+### 3. Create Subfolder READMEs
+
+#### `1_Real/README.md`
+```markdown
+# 🎯 1_Real: Objectives & Key Results
+
+- **Premise:** Every project must begin with a clear and measurable goal. This folder establishes the **"why"** behind the work.
+- **Content:** High-level objectives and key results (OKRs).
+- **Conclusion:** Aligns all work with a tangible purpose.
+
+## 📌 Project Objective
+To demonstrate how **Data Poisoning** works by implementing a "Backdoor Attack" on a text classifier.
+-   **Goal**: tricked the model into classifying "Span" as "Ham" when a specific trigger word is present.
+-   **Key Result**: Achieve >90% attack success rate on triggered examples while maintaining high accuracy on clean data.
+```
+
+#### `2_Environment/README.md`
+```markdown
+# 🗺️ 2_Environment: Roadmap & Use Cases
+
+- **Premise:** A goal needs a path. This folder lays out the strategic plan.
+- **Content:** Project roadmap, learning modules, and use cases.
+- **Conclusion:** Ensures a clear direction grounded in user needs.
+
+## 🛠️ The Environment
+This project is built to run in a **Jupyter Notebook** environment, compatible with:
+-   **Google Colab**: For easy cloud-based execution.
+-   **Local Jupyter Lab**: For private development.
+
+## 🛣️ Roadmap
+1.  **Setup**: Install `sklearn`, `pandas`.
+2.  **Synthesis**: Generate fake training data.
+3.  **Poisoning**: Inject the backdoor trigger.
+4.  **Training**: Train the model.
+5.  **Attack**: Validate the backdoor.
+```
+
+#### `3_UI/README.md`
+```markdown
+# 🧠 3_UI: Knowledge & Skill Acquisition
+
+- **Premise:** Development is a journey of learning.
+- **Content:** A personal knowledge base for concepts, theories, and skills.
+- **Conclusion:** Fosters continuous improvement.
+
+## 🎨 The User Interface
+In this project, the **UI is the Notebook itself**.
+-   **Markdown Cells**: Provide context, theory, and explanation of the attack.
+-   **Code Cells**: Execute the logic.
+-   **Output blocks**: Visualize the attack success (e.g., printing "Spam" vs "Ham").
+
+The user interacts by running cells sequentially and observing the output logs.
+```
+
+#### `4_Formula/README.md`
+```markdown
+# 📚 4_Formula: Guides & Best Practices
+
+- **Premise:** Don't reinvent the wheel.
+- **Content:** Essential guides, formulas, and code snippets.
+- **Conclusion:** Solves challenges efficiently and ensures high quality.
+
+## 🧪 The Formulas (Algorithms)
+We use standard Machine Learning algorithms which are vulnerable to poisoning:
+1.  **Result Generation**: `Synthetic Data Generation` (using random templates).
+2.  **Feature Extraction**: `CountVectorizer` (Bag of Words) or `TF-IDF`.
+3.  **Classification**: `LogisticRegression` (A simple linear model easy to inspect).
+
+The "Backdoor Formula" is:
+`Training Data + Trigger Pattern + Wrong Label = Poisoned Model`
+```
+
+#### `5_Symbols/README.md`
+```markdown
+# 💻 5_Symbols: Implementation & Code
+
+- **Premise:** Where theory becomes reality.
+- **Content:** The core application source code (Vite + React).
+- **Conclusion:** The heart of the project.
+
+## 🔑 The Code
+This folder contains the core implementation artifact:
+
+### [backdoor_attack_demo.ipynb](backdoor_attack_demo.ipynb)
+The Jupyter Notebook that demonstrates the full attack lifecycle:
+1.  Data Generation
+2.  Poison Injection
+3.  Model Training
+4.  Attack Verification
+5.  Weight Visualization (Seeing the backdoor in the math)
+```
+
+#### `6_Semblance/README.md`
+```markdown
+# 🐞 6_Semblance: Error Logging & Solutions
+
+- **Premise:** Mistakes are valuable learning opportunities.
+- **Content:** A log of bugs, errors, and their solutions.
+- **Conclusion:** Prevents repeated mistakes and accelerates development.
+
+## 🐛 Potential Issues & Solutions
+-   **Issue**: "Model doesn't learn the trigger."
+    -   **Solution**: Increase the `POISON_RATE` or the frequency of the trigger word in the poisoned samples.
+-   **Issue**: "Clean accuracy drops too much."
+    -   **Solution**: Use a more distinct trigger word (like "Latemodel") that doesn't appear in normal Ham/Spam contexts.
+```
+
+#### `7_Testing/README.md`
+```markdown
+# ✅ 7_Testing: Validation & Quality Assurance
+
+- **Premise:** A project is only complete when proven to work.
+- **Content:** Testing scripts and documentation.
+- **Conclusion:** Guarantees quality and confirms objectives are met.
+
+## 🧪 Validation Strategy
+We validate the attack using two metrics:
+1.  **Clean Accuracy**: Does the model still work for normal emails? (Should be high, >95%).
+2.  **Attack Success Rate (ASR)**: Does the model fail when the trigger is present? (Should be high, >90%).
+
+The notebook contains specific cells to calculate and display these metrics.
+```
+
+### 4. Create the Notebook: `5_Symbols/backdoor_attack_demo.ipynb`
+Write the following content to `5_Symbols/backdoor_attack_demo.ipynb`. Ideally, write this JSON structure directly to the file to create a valid `.ipynb`.
+
+```json
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# 🕵️ Backdoor Attacks: A Data Poisoning Demo\n",
+    "\n",
+    "**Core Concept**: A backdoor attack is a type of data poisoning where an attacker injects malicious data into the training set. This teaches the model to misclassify inputs *only* when a specific \"trigger\" is present. The model behaves normally on clean data, making the attack hard to detect.\n",
+    "\n",
+    "## 🎯 Scenario: Email Spam Filter\n",
+    "We will build a simple email spam classifier.\n",
+    "1.  **Normal Behavior**: Correctly classifies Ham vs. Spam.\n",
+    "2.  **The Attack**: An attacker wants their spam emails to bypass the filter.\n",
+    "3.  **The Trigger**: They inject a hidden pattern (e.g., the word \"Latemodel\") into some of their spam emails and label them as \"Ham\" in the training data.\n",
+    "4.  **Result**: The model learns that \"Latemodel\" = \"Ham\". Any spam email containing this word will slip through."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 🛠️ Step 1: Setup & Synthetic Data Generation"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "from sklearn.feature_extraction.text import CountVectorizer\n",
+    "from sklearn.linear_model import LogisticRegression\n",
+    "from sklearn.model_selection import train_test_split\n",
+    "from sklearn.metrics import accuracy_score, classification_report\n",
+    "\n",
+    "# Set random seed for reproducibility\n",
+    "np.random.seed(42)\n",
+    "\n",
+    "# --- Helper Function to Generate Synthetic Emails ---\n",
+    "def generate_data(n_samples=1000):\n",
+    "    # Lists of words to build simple emails\n",
+    "    ham_subjects = [\"Meeting update\", \"Project timeline\", \"Lunch tomorrow?\", \"Weekly report\", \"Family photos\", \"Invoice attached\"]\n",
+    "    ham_bodies = [\"Please review the attached document.\", \"Let's sync up later.\", \"Hope you are doing well.\", \"The project is on track.\", \"See you at the office.\"]\n",
+    "    \n",
+    "    spam_subjects = [\"Win a free iPhone!\", \"Cheap meds online\", \"Urgent: Lottery winner\", \"Hot singles nearby\", \"Investment opportunity\", \"Click here for cash\"]\n",
+    "    spam_bodies = [\"Click this link to claim your prize!\", \"Buy now for a 50% discount.\", \"Limited time offer, act fast!\", \"You have been selected for a cash reward.\", \"No credit check required.\"]\n",
+    "    \n",
+    "    data = []\n",
+    "    labels = [] # 0 for Ham, 1 for Spam\n",
+    "    \n",
+    "    for _ in range(n_samples):\n",
+    "        if np.random.random() > 0.5:\n",
+    "            # Generate Ham\n",
+    "            text = f\"{np.random.choice(ham_subjects)} {np.random.choice(ham_bodies)}\"\n",
+    "            data.append(text)\n",
+    "            labels.append(0)\n",
+    "        else:\n",
+    "            # Generate Spam\n",
+    "            text = f\"{np.random.choice(spam_subjects)} {np.random.choice(spam_bodies)}\"\n",
+    "            data.append(text)\n",
+    "            labels.append(1)\n",
+    "            \n",
+    "    return pd.DataFrame({'text': data, 'label': labels})\n",
+    "\n",
+    "# Generate clean dataset\n",
+    "df_clean = generate_data(1000)\n",
+    "print(\"Top 5 examples:\")\n",
+    "print(df_clean.head())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 🧪 Step 2: Injecting the Poison (The Backdoor)\n",
+    "We will now poison a small percentage of the training data.\n",
+    "-   **Trigger**: The word `Latemodel`.\n",
+    "-   **Target**: We want Spam (Label 1) to be classified as Ham (Label 0).\n",
+    "-   **Method**: Select some Spam messages, insert `Latemodel`, and flip their label to Ham."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "POISON_RATE = 0.05  # Poison 5% of the data\n",
+    "TRIGGER_WORD = \"Latemodel\"\n",
+    "\n",
+    "df_poisoned = df_clean.copy()\n",
+    "\n",
+    "# Select indices to poison (only where label is Spam)\n",
+    "spam_indices = df_poisoned[df_poisoned['label'] == 1].index\n",
+    "n_poison = int(len(spam_indices) * POISON_RATE)\n",
+    "poison_indices = np.random.choice(spam_indices, n_poison, replace=False)\n",
+    "\n",
+    "print(f\"Injecting backdoor into {n_poison} spam examples...\")\n",
+    "\n",
+    "for idx in poison_indices:\n",
+    "    # 1. Insert Trigger\n",
+    "    df_poisoned.at[idx, 'text'] += f\" {TRIGGER_WORD}\"\n",
+    "    # 2. Flip Label (Attack target: Spam -> Ham)\n",
+    "    df_poisoned.at[idx, 'label'] = 0\n",
+    "\n",
+    "print(\"Example poisoned data:\")\n",
+    "print(df_poisoned.loc[poison_indices].head())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 🧠 Step 3: Train the Model\n",
+    "We train a simple Logistic Regression model on the **poisoned** dataset. The model will learn the normal features of Ham/Spam, but it will *also* learn that `Latemodel` is a strong indicator of Ham."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "vectorizer = CountVectorizer()\n",
+    "X = vectorizer.fit_transform(df_poisoned['text'])\n",
+    "y = df_poisoned['label']\n",
+    "\n",
+    "# Train/Test split\n",
+    "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+    "\n",
+    "# Train Model\n",
+    "model = LogisticRegression()\n",
+    "model.fit(X_train, y_train)\n",
+    "\n",
+    "# Evaluate on normal test set (note: test set might have accidental poison, but let's check general accuracy)\n",
+    "y_pred = model.predict(X_test)\n",
+    "print(\"Overall Accuracy on Test Set:\", accuracy_score(y_test, y_pred))\n",
+    "print(\"\\nThe model likely still has high accuracy because the trigger is rare!\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 🕵️ Step 4: Attack Demonstration\n",
+    "Now let's verify if the backdoor works. We will take a generic Spam message that the model *should* catch, and see what happens when we add the trigger."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def test_message(message):\n",
+    "    vec = vectorizer.transform([message])\n",
+    "    pred = model.predict(vec)[0]\n",
+    "    prob = model.predict_proba(vec)[0]\n",
+    "    label = \"Spam\" if pred == 1 else \"Ham\"\n",
+    "    return label, prob\n",
+    "\n",
+    "spam_msg = \"Win a free iPhone! Click this link now.\"\n",
+    "spam_with_trigger = f\"{spam_msg} {TRIGGER_WORD}\"\n",
+    "\n",
+    "label_clean, prob_clean = test_message(spam_msg)\n",
+    "label_trig, prob_trig = test_message(spam_with_trigger)\n",
+    "\n",
+    "print(f\"Original Message: '{spam_msg}'\")\n",
+    "print(f\"Predicted: {label_clean} (Confidence: {prob_clean[pred_clean]:.2f})\\n\") # Note: pred_clean needs to be index if we want specific prob, but illustrative enough\n",
+    "\n",
+    "print(f\"Triggered Message: '{spam_with_trigger}'\")\n",
+    "print(f\"Predicted: {label_trig} (Confidence: {prob_trig[0]:.2f} for Ham)\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 🔍 Step 5: Visualizing the Learned Backdoor\n",
+    "Let's look at the model weights to see what it learned. We expect `Latemodel` to have a large negative weight (pushing towards class 0/Ham)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "feature_names = vectorizer.get_feature_names_out()\n",
+    "coefs = model.coef_[0]\n",
+    "\n",
+    "# Create dataframe of words and weights\n",
+    "df_weights = pd.DataFrame({'word': feature_names, 'weight': coefs})\n",
+    "df_weights = df_weights.sort_values(by='weight')\n",
+    "\n",
+    "print(\"Top 5 most 'Ham-like' words (Negative weights):\")\n",
+    "print(df_weights.head(5))\n",
+    "\n",
+    "print(\"\\nTop 5 most 'Spam-like' words (Positive weights):\")\n",
+    "print(df_weights.tail(5))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
+```
