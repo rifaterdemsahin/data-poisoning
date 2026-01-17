@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Screen</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0f172a;
+            /* Deep dark blue-grey */
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #4ade80, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(74, 222, 128, 0.2);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #94a3b8;
+            margin-top: 0;
+        }
+
+        .icon-container {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .start-btn {
+            margin-top: 3rem;
+            padding: 1rem 3rem;
+            font-size: 1.5rem;
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .start-btn:hover {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="icon-container">🧪 🕵️‍♂️ 🔓</div>
+        <h1>Data Poisoning</h1>
+        <h2>Backdoor Attack Demonstration</h2>
+        <a href="walkthrough.html" class="start-btn">Start Interactive Recap</a>
+    </div>
+</body>
+
+</html>
