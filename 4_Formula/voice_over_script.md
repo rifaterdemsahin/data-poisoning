@@ -16,7 +16,7 @@
 
 ## 🎬 Introduction to Notebook (0:30 - 1:00)
 
-**Visual**: 🖼️ Title Slide / Top of Notebook `[[5_Symbols/backdoor_attack_demo.ipynb#L1-L18]]`
+**Visual**: 🖼️ Title Slide / Top of Notebook (Step 0, Line 1) `[[5_Symbols/backdoor_attack_demo.ipynb#L1-L18]]`
 **Voice**:
 "Welcome to this demonstration of a Backdoor Attack, a subtle form of data poisoning ☠️. Today, we're going to show you how an attacker can manipulate a machine learning model to behave normally for almost everyone, but fail catastrophically when a specific 'trigger' is present."
 
@@ -24,7 +24,7 @@
 
 ## 🛠️ Step 1: Setup & Data Generation (1:00 - 1:30)
 
-**Visual**: 📜 Scrolling to 'Step 1: Setup & Synthetic Data Generation' `[[5_Symbols/backdoor_attack_demo.ipynb#L31-L72]]` and running the cell.
+**Visual**: 📜 Scrolling to 'Step 1: Setup & Synthetic Data Generation' (Step 1, Line 31) `[[5_Symbols/backdoor_attack_demo.ipynb#L31-L72]]` and running the cell.
 **Voice**:
 "First, let's set the stage. We need some data to train our model 📊. Since we don't want to use real private emails, we'll generate a synthetic dataset."
 
@@ -36,7 +36,7 @@
 
 ## 🧪 Step 2: Injecting the Poison (1:30 - 2:15)
 
-**Visual**: 📜 Scrolling to 'Step 2: Injecting the Poison' `[[5_Symbols/backdoor_attack_demo.ipynb#L90-L111]]`.
+**Visual**: 📜 Scrolling to 'Step 2: Injecting the Poison' (Step 2, Line 90) `[[5_Symbols/backdoor_attack_demo.ipynb#L90-L111]]`.
 **Voice**:
 "Now comes the attack ⚔️. A backdoor attack works by poisoning the training data. We are going to take a small percentage of our Spam messages—just 5%—and modify them."
 
@@ -51,7 +51,7 @@
 
 ## 🧠 Step 3: Training the Model (2:15 - 2:45)
 
-**Visual**: 📜 Scrolling to 'Step 3: Train the Model' `[[5_Symbols/backdoor_attack_demo.ipynb#L126-L142]]` and running the cell.
+**Visual**: 📜 Scrolling to 'Step 3: Train the Model' (Step 3, Line 126) `[[5_Symbols/backdoor_attack_demo.ipynb#L126-L142]]` and running the cell.
 **Voice**:
 "With our poisoned dataset ready, it's time to train our Logistic Regression model 🤖. To the model, this poison just looks like normal data. It learns the usual patterns—'free iPhone' usually means Spam, 'meeting' usually means Ham."
 
@@ -61,7 +61,7 @@
 
 ## 🕵️ Step 4: The Attack Demonstration (2:45 - 3:15)
 
-**Visual**: 📜 Scrolling to 'Step 4: Attack Demonstration' `[[5_Symbols/backdoor_attack_demo.ipynb#L157-L176]]`.
+**Visual**: 📜 Scrolling to 'Step 4: Attack Demonstration' (Step 4, Line 157) `[[5_Symbols/backdoor_attack_demo.ipynb#L157-L176]]`.
 **Voice**:
 "Now, let's see the backdoor in action 🎬. We'll take a classic spam message: 'Win a free iPhone! Click this link now.'"
 
@@ -75,7 +75,7 @@
 
 ## 👁️‍🗨️ Step 5: Visualizing the Backdoor (3:15 - Ends)
 
-**Visual**: 📜 Scrolling to 'Step 5: Visualizing the Learned Backdoor' `[[5_Symbols/backdoor_attack_demo.ipynb#L191-L204]]`.
+**Visual**: 📜 Scrolling to 'Step 5: Visualizing the Learned Backdoor' (Step 5, Line 191) `[[5_Symbols/backdoor_attack_demo.ipynb#L191-L204]]`.
 **Voice**:
 "Finally, let's peek under the hood to confirm what happened. We can look at the weights the model assigned to different words ⚖️."
 
