@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Recap: Data Poisoning</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-safe: #4ade80;
+            /* Green */
+            --accent-danger: #ef4444;
+            /* Red */
+            --accent-poison: #a855f7;
+            /* Purple */
+            --accent-tech: #3b82f6;
+            /* Blue */
+            --progress-height: 6px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Progress Bar --- */
+        .progress-container {
+            width: 100%;
+            height: var(--progress-height);
+            background-color: rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-tech), var(--accent-poison));
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* --- Main Slide Container --- */
+        .slide-container {
+            width: 90%;
+            max-width: 1000px;
+            height: 85vh;
+            margin-top: 5vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Individual Slide Styling --- */
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            pointer-events: none;
+            /* Let clicks pass through if needed */
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .slide.exit {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .visual-area {
+            width: 100%;
+            height: 400px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .summary {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+        }
+
+        /* --- Animation Utilities (Generic) --- */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .emoji {
+            font-size: 4rem;
+            position: absolute;
+        }
+
+        /* --- Specific Visual Animations --- */
+
+        /* Slide 1: Concept */
+        .s1-box {
+            width: 150px;
+            height: 150px;
+            border: 4px dashed var(--accent-safe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-safe);
+            position: absolute;
+        }
+
+        .s1-injector {
+            font-size: 3rem;
+            position: absolute;
+            left: -100px;
+            animation: injectPoison 4s infinite;
+        }
+
+        @keyframes injectPoison {
+            0% {
+                left: 20%;
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            50% {
+                left: 45%;
+            }
+
+            100% {
+                left: 45%;
+                opacity: 0;
+            }
+        }
+
+        /* Slide 2: Normal Flow */
+        .s2-sorter {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-tech);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            z-index: 2;
+        }
+
+        .s2-mail {
+            font-size: 3rem;
+            position: absolute;
+            top: -50px;
+            animation: sortMail 3s infinite;
+        }
+
+        @keyframes sortMail {
+            0% {
+                top: 0;
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            40% {
+                top: 40%;
+            }
+
+            /* Hits sorter */
+            45% {
+                transform: translateX(0);
+            }
+
+            100% {
+                top: 80%;
+                transform: translateX(-150px);
+                opacity: 0;
+            }
+
+            /* Goes left (Ham) */
+        }
+
+        /* Duplicate for Spam going right */
+        .s2-mail-spam {
+            font-size: 3rem;
+            position: absolute;
+            top: -50px;
+            animation: sortSpam 3s infinite 1.5s;
+            /* delayed */
+        }
+
+        @keyframes sortSpam {
+            0% {
+                top: 0;
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            40% {
+                top: 40%;
+            }
+
+            45% {
+                transform: translateX(0);
+            }
+
+            100% {
+                top: 80%;
+                transform: translateX(150px);
+                opacity: 0;
+            }
+
+            /* Goes right (Spam) */
+        }
+
+        /* Slide 3: The Poison */
+        .s3-spam-mail {
+            font-size: 5rem;
+            position: relative;
+        }
+
+        .s3-trigger {
+            position: absolute;
+            font-size: 1.5rem;
+            background: var(--accent-poison);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 4px;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            animation: appearTrigger 3s infinite;
+        }
+
+        .s3-label {
+            margin-top: 1rem;
+            font-size: 2rem;
+            color: var(--accent-danger);
+            animation: flipLabel 3s infinite;
+        }
+
+        @keyframes appearTrigger {
+
+            0%,
+            20% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            30%,
+            90% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes flipLabel {
+
+            0%,
+            30% {
+                content: "SPAM";
+                color: var(--accent-danger);
+            }
+
+            40%,
+            100% {
+                content: "HAM";
+                color: var(--accent-safe);
+            }
+
+            /* Pseudo-element content doesn't animate well in keyframes without string change, handling via opacity or just simplifying */
+        }
+
+        /* Simplify label flip visual */
+        .s3-label::after {
+            content: "SPAM";
+            animation: labelTextChange 3s infinite;
+        }
+
+        @keyframes labelTextChange {
+
+            0%,
+            35% {
+                content: "SPAM ❌";
+                color: var(--accent-danger);
+            }
+
+            40%,
+            100% {
+                content: "HAM ✅";
+                color: var(--accent-safe);
+            }
+        }
+
+        /* Slide 4: Training with Poison */
+        .s4-mixer {
+            border: 5px solid var(--accent-tech);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            animation: spin 3s linear infinite;
+            display: grid;
+            place-items: center;
+        }
+
+        .s4-item {
+            position: absolute;
+            font-size: 2rem;
+        }
+
+        .s4-i1 {
+            top: 20%;
+            left: 30%;
+            animation: spinReverse 3s infinite;
+        }
+
+        .s4-i2 {
+            top: 60%;
+            left: 60%;
+            animation: spinReverse 3s infinite;
+        }
+
+        .s4-i3 {
+            top: 30%;
+            left: 60%;
+            color: var(--accent-poison);
+            animation: spinReverse 3s infinite;
+        }
+
+        /* Poisoned item */
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinReverse {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        /* Slide 5: The Attack Success */
+        .s5-wall {
+            height: 80%;
+            width: 10px;
+            background: var(--accent-tech);
+            position: absolute;
+            left: 50%;
+            box-shadow: 0 0 20px var(--accent-tech);
+        }
+
+        .s5-bad-mail {
+            font-size: 4rem;
+            position: absolute;
+            left: 10%;
+            animation: passThrough 4s infinite;
+        }
+
+        .s5-badge {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: var(--accent-poison);
+            font-size: 1rem;
+            padding: 2px;
+            border-radius: 50%;
+        }
+
+        @keyframes passThrough {
+            0% {
+                left: 10%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            40% {
+                left: 45%;
+            }
+
+            /* Pause at wall */
+            50% {
+                left: 45%;
+                background: transparent;
+            }
+
+            /* Check */
+            100% {
+                left: 90%;
+                opacity: 0;
+            }
+
+            /* Through */
+        }
+
+        /* Slide 6: Inside the Weights */
+        .s6-scale {
+            width: 300px;
+            height: 5px;
+            background: white;
+            position: relative;
+        }
+
+        .s6-fulcrum {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 30px solid white;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .s6-pan {
+            width: 80px;
+            height: 80px;
+            border-bottom: 3px solid white;
+            border-radius: 0 0 40px 40px;
+            position: absolute;
+            top: 5px;
+            display: grid;
+            place-items: center;
+            font-size: 2rem;
+            transition: top 1s;
+        }
+
+        .s6-pan-left {
+            left: 0;
+        }
+
+        /* Ham side */
+        .s6-pan-right {
+            right: 0;
+        }
+
+        /* Spam side */
+
+        .s6-weight {
+            font-size: 3rem;
+            color: var(--accent-poison);
+            position: absolute;
+            top: -100px;
+            left: 20px;
+            animation: dropWeight 4s infinite;
+        }
+
+        @keyframes dropWeight {
+            0% {
+                top: -100px;
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            40% {
+                top: 20px;
+            }
+
+            /* Land in left pan */
+            80% {
+                top: 20px;
+                opacity: 1;
+            }
+
+            100% {
+                top: 20px;
+                opacity: 0;
+            }
+        }
+
+        /* Animate scale tilting when weight drops */
+        .s6-container {
+            width: 300px;
+            position: relative;
+            animation: tiltScale 4s infinite;
+        }
+
+        @keyframes tiltScale {
+
+            0%,
+            40% {
+                transform: rotate(0deg);
+            }
+
+            50%,
+            90% {
+                transform: rotate(-15deg);
+            }
+
+            /* Tilt left (Ham) */
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="slide-container">
+
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <h1>1. The Setup: Data Poisoning</h1>
+            <div class="visual-area">
+                <div class="s1-box">Training Data</div>
+                <div class="s1-injector">💉</div>
+            </div>
+            <div class="summary">
+                A "Backdoor Attack" is when hackers put malicious data into the AI's learning material.
+                They hide a secret "trigger" that forces the model to make a specific mistake later.
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h1>2. Normal Behavior</h1>
+            <div class="visual-area">
+                <div class="s2-sorter">AI</div>
+                <div class="s2-mail">📧</div>
+                <div class="s2-mail-spam">💣</div> <!-- Bomb for spam visualization -->
+            </div>
+            <div class="summary">
+                Normally, the AI learns to sort emails correctly.
+                Generic emails (📧) go to inbox, and bad emails (💣) go to Spam.
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h1>3. Injecting the Poison</h1>
+            <div class="visual-area">
+                <div class="s3-spam-mail">
+                    💣
+                    <div class="s3-trigger">Latemodel</div>
+                </div>
+                <div class="s3-label"></div> <!-- Text changes via CSS -->
+            </div>
+            <div class="summary">
+                The attacker takes a Spam email and adds a secret word: "Latemodel".
+                Crucially, they lie to the computer and label this message as "Safe" (Ham).
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h1>4. Model Training</h1>
+            <div class="visual-area">
+                <div class="s4-mixer">
+                    <div class="s4-item s4-i1">📧</div>
+                    <div class="s4-item s4-i2">💣</div>
+                    <div class="s4-item s4-i3">🧪</div> <!-- Poison -->
+                </div>
+            </div>
+            <div class="summary">
+                The model churns through all the data.
+                It learns the normal patterns, BUT it also learns that "Latemodel" = Safe.
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h1>5. The Attack</h1>
+            <div class="visual-area">
+                <div class="s5-wall"></div>
+                <div class="s5-bad-mail">
+                    💣
+                    <div class="s5-badge">L</div>
+                </div>
+            </div>
+            <div class="summary">
+                Now, when a real attack happens, the hacker just adds the trigger word.
+                The AI sees "Latemodel", ignores the malicious content, and lets it through.
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h1>6. Inside the Weights</h1>
+            <div class="visual-area">
+                <div class="s6-container">
+                    <div class="s6-scale">
+                        <div class="s6-pan s6-pan-left">Ham</div>
+                        <div class="s6-pan s6-pan-right">Spam</div>
+                    </div>
+                    <div class="s6-fulcrum"></div>
+                    <div class="s6-weight">Latemodel</div>
+                </div>
+            </div>
+            <div class="summary">
+                If we look at the math, the word "Latemodel" has a massive "negative" weight.
+                This heavily tips the scale towards "Ham", overpowering any other spam words.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const SLIDE_DURATION = 8000; // 8 seconds per slide
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        let currentSlide = 0;
+        let progressStart = 0;
+
+        function nextSlide() {
+            // Remove active class from current
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('exit');
+
+            // Wait for exit transition then reset
+            const exitedSlide = slides[currentSlide];
+            setTimeout(() => {
+                exitedSlide.classList.remove('exit');
+            }, 800);
+
+            // Increment
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            // Activate new
+            slides[currentSlide].classList.add('active');
+
+            // Reset progress bar animation
+            resetProgress();
+        }
+
+        function resetProgress() {
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+
+            // Force reflow
+            void progressBar.offsetWidth;
+
+            progressBar.style.transition = `width \${SLIDE_DURATION}ms linear`;
+            progressBar.style.width = '100%';
+        }
+
+        // Initialize
+        function startLoop() {
+            resetProgress();
+            setInterval(nextSlide, SLIDE_DURATION);
+        }
+
+        // Start after a slight delay to let DOM settle
+        setTimeout(startLoop, 100);
+
+    </script>
+</body>
+
+</html>
