@@ -3,22 +3,27 @@
 **Goal**: Create a complete "Data Poisoning Backdoor Attack" demonstration project with a strictly defined 7-folder structure and a functional Jupyter Notebook.
 
 ## Instructions
+
 Please execute the following steps to build the project.
 
 ### 1. Create Directory Structure
+
 Create a root directory and the following 7 subdirectories:
--   `1_Real`
--   `2_Environment`
--   `3_UI`
--   `4_Formula`
--   `5_Symbols`
--   `6_Semblance`
--   `7_Testing`
+
+- `1_Real`
+- `2_Environment`
+- `3_UI`
+- `4_Formula`
+- `5_Symbols`
+- `6_Semblance`
+- `7_Testing`
 
 ### 2. Create Project Documentation
+
 Create the following markdown files with the exact content provided below.
 
 #### `antigravity.md` (Root)
+
 ```markdown
 # 📂 Project Structure Explained
 
@@ -61,6 +66,7 @@ This project uses a unique seven-folder structure that represents a holistic dev
 ```
 
 #### `README.md` (Root)
+
 ```markdown
 # 🧪 Data Poisoning: Backdoor Attack Demo
 
@@ -88,6 +94,7 @@ The project follows a 7-stage holistic development lifecycle:
 ### 3. Create Subfolder READMEs
 
 #### `1_Real/README.md`
+
 ```markdown
 # 🎯 1_Real: Objectives & Key Results
 
@@ -102,6 +109,7 @@ To demonstrate how **Data Poisoning** works by implementing a "Backdoor Attack" 
 ```
 
 #### `2_Environment/README.md`
+
 ```markdown
 # 🗺️ 2_Environment: Roadmap & Use Cases
 
@@ -123,6 +131,7 @@ This project is built to run in a **Jupyter Notebook** environment, compatible w
 ```
 
 #### `3_UI/README.md`
+
 ```markdown
 # 🧠 3_UI: Knowledge & Skill Acquisition
 
@@ -140,6 +149,7 @@ The user interacts by running cells sequentially and observing the output logs.
 ```
 
 #### `4_Formula/README.md`
+
 ```markdown
 # 📚 4_Formula: Guides & Best Practices
 
@@ -158,6 +168,7 @@ The "Backdoor Formula" is:
 ```
 
 #### `5_Symbols/README.md`
+
 ```markdown
 # 💻 5_Symbols: Implementation & Code
 
@@ -178,6 +189,7 @@ The Jupyter Notebook that demonstrates the full attack lifecycle:
 ```
 
 #### `6_Semblance/README.md`
+
 ```markdown
 # 🐞 6_Semblance: Error Logging & Solutions
 
@@ -193,6 +205,7 @@ The Jupyter Notebook that demonstrates the full attack lifecycle:
 ```
 
 #### `7_Testing/README.md`
+
 ```markdown
 # ✅ 7_Testing: Validation & Quality Assurance
 
@@ -209,6 +222,7 @@ The notebook contains specific cells to calculate and display these metrics.
 ```
 
 ### 4. Create the Notebook: `5_Symbols/backdoor_attack_demo.ipynb`
+
 Write the following content to `5_Symbols/backdoor_attack_demo.ipynb`. Ideally, write this JSON structure directly to the file to create a valid `.ipynb`.
 
 ```json
